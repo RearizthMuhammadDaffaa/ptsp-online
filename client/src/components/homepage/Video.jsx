@@ -2,9 +2,9 @@ import React from 'react'
 import { dataVideo } from '../../utils/data'
 const Video = () => {
   return (
-    <div className='grid  grid-cols-2 gap-9 max-w-full mx-auto'>
+    <div className='grid  grid-cols-2 lg:gap-9 gap:3 max-w-full mx-auto'>
       {dataVideo.map((data,i)=>(
-        <a key={i} href="https://www.youtube.com/watch?v=1tPpbaT3nvE" target='_blank' className=' bg-red-100 mx-auto  block z-1 lg:w-[516px]'>
+        <a key={i} href="https://www.youtube.com/watch?v=1tPpbaT3nvE" target='_blank' className='  mx-auto  block z-1 lg:w-[516px]'>
           
           <iframe src={data.link}   title="YouTube Video"
          

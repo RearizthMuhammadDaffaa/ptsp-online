@@ -10,7 +10,8 @@ export default {
         'shadow-medium' : '0 4 8 rgba(0, 0, 0, 0.06) , 0 0 4 rgba(0, 0, 0, 0.04) '
       },
       colors:{
-        'green-primary':'rgba(0, 133, 60, 1)'
+        'green-primary':'rgba(0, 133, 60, 1)',
+        'slate-primary':'rgba(248, 248, 249, 1)'
       }
     },
   },
