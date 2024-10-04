@@ -12,6 +12,9 @@ export default {
       colors:{
         'green-primary':'rgba(0, 133, 60, 1)',
         'slate-primary':'rgba(248, 248, 249, 1)'
+      },
+      borderWidth:{
+        '1':'1px'
       }
     },
   },
