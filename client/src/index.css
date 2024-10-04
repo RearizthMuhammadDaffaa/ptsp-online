@@ -13,3 +13,7 @@ body{
   border: none;
   box-shadow: none; /* Jika ingin menghilangkan shadow default juga */
 }
+
+.hasil-panjar-text{
+ @apply text-green-primary
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { dataKecamatan, dataHarga } from "../utils/data";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,19 +7,29 @@ const Panjar = () => {
   const [areaTergugat, setAreaTergugat] = useState("dalam-kabupaten");
   const [radiusTergugat, setRadiusTergugat] = useState(1);
   const [radiusPenggugat, setRadiusPenggugat] = useState(1);
-  const [harga, setHarga] = useState({});
+  const [harga_p, setHarga_P] = useState({});
+  const [harga_t, setHarga_T] = useState({});
   const [kec, setKec] = useState(dataKecamatan[0].kecamatan);
   const [kecTergugat, setKecTergugat] = useState(dataKecamatan[0].kecamatan);
   const navigate = useNavigate();
   const [title, setTitle] = useState("suami");
+  
+
+  useEffect(()=> {
+
+  },[])
 
   const handleHitungPanjar = () => {
     // const radiusTerkecil = Math.min(radiusPenggugat, radiusTergugat);
     const indexKecPeng = dataKecamatan.find(item => item.kecamatan === kec);
-    const hargaPenggugat = dataHarga.find(item => item.radius === indexKecPeng.radius)
+    const hargaPenggugat = indexKecPeng ? dataHarga.find(item => item.radius === indexKecPeng.radius) : null
     const indexKecTer = dataKecamatan.find(item => item.kecamatan === kecTergugat);
-    const hargaTergugat = dataHarga.find(item => item.radius === indexKecTer.radius)
-    navigate(`/panjar/hasil-panjar/${kec}`, { state: { hargaPenggugat,hargaTergugat ,title,kec,kecTergugat} }); // Navigasi dengan parameter radius dan data harga);
+    const hargaTergugat = indexKecTer ? dataHarga.find(item => item.radius === indexKecTer.radius) : null;
+    const finalHargaPenggugat = hargaPenggugat ? hargaPenggugat :  harga_p ;
+
+    // Jika hargaTergugat kosong, gunakan harga_t
+    const finalHargaTergugat = hargaTergugat ? hargaTergugat :  harga_t ;
+    navigate(`/panjar/hasil-panjar/`, { state: { hargaPenggugat: finalHargaPenggugat, hargaTergugat: finalHargaTergugat, title, kec, kecTergugat, harga_p, harga_t } });
     
   };
 
@@ -51,15 +61,15 @@ const Panjar = () => {
         </div>
 
         {title != "permohonan" ? (
-          <div className="flex gap-5">
+          <div className="flex md:gap-5 gap-2">
             <div className="w-[50%]">
               <h1 className="text-green-primary font-bold text-xl mt-6">
                 {title == "suami"
-                  ? "Data Termohon (suami)"
+                  ? "Data Pemohon (suami)"
                   : "Data Penggugat (Istri)"}
               </h1>
               <div className="w-full border-1 border-black rounded-md mt-3">
-                <label className="form-control w-full max-w-screen-xl p-2">
+                <label className="form-control w-full max-w-screen-xl md:p-2">
                   <div className="label">
                     <span className="label-text text-xs text-black">
                       Tempat tinggal{" "}
@@ -82,7 +92,7 @@ const Panjar = () => {
                 </label>
               </div>
               <div className="w-full border-1 border-black rounded-md mt-3">
-                <label className="form-control w-full max-w-screen-xl p-2">
+                <label className="form-control w-full max-w-screen-xl md:p-2">
                   <div className="label">
                     <span className="label-text text-xs text-black">
                       {area == "luar-kabupaten"
@@ -95,6 +105,10 @@ const Panjar = () => {
                       type="number"
                       placeholder="Type here"
                       className="input input-xs w-full custome-select "
+                      onChange={(e)=>{
+                        setKec("");
+                        setHarga_P(parseInt(e.target.value))
+                      }}
                     />
                   ) : (
                     <select
@@ -118,13 +132,13 @@ const Panjar = () => {
             <div className="w-[50%]">
               <h1 className="text-green-primary font-bold text-xl mt-6">
                 {title == "suami"
-                  ? "Data Termohon (suami)"
+                  ? "Data Termohon (istri)"
                   : title != "istri"
                   ? "Data Termohon"
-                  : "Data Penggugat (Istri)"}
+                  : "Data Tergugat (Suami)"}
               </h1>
               <div className="w-full border-1 border-black rounded-md mt-3">
-                <label className="form-control w-full max-w-screen-xl p-2">
+                <label className="form-control w-full max-w-screen-xl md:p-2">
                   <div className="label">
                     <span className="label-text text-xs text-black">
                       Tempat tinggal{" "}
@@ -147,10 +161,10 @@ const Panjar = () => {
                 </label>
               </div>
               <div className="w-full border-1 border-black rounded-md mt-3">
-                <label className="form-control w-full max-w-screen-xl p-2">
+                <label className="form-control w-full max-w-screen-xl md:p-2">
                   <div className="label">
                     <span className="label-text text-xs text-black">
-                      {area == "luar-kabupaten"
+                      {areaTergugat == "luar-kabupaten"
                         ? "Nilai Radius Termasuk Ongkos Kirim (Rp)"
                         : "Kecamatan"}
                     </span>
@@ -160,6 +174,10 @@ const Panjar = () => {
                       type="number"
                       placeholder="Type here"
                       className="input input-xs w-full custome-select "
+                      onChange={(e)=>{
+                        setKecTergugat("");
+                        setHarga_T(parseInt(e.target.value))
+                      }}
                     />
                   ) : (
                     <select
@@ -228,6 +246,10 @@ const Panjar = () => {
                     type="number"
                     placeholder="Type here"
                     className="input input-xs w-full custome-select "
+                    onChange={(e)=>{
+                      setKec("");
+                      setHarga_P(e.target.value)
+                    }}
                   />
                 ) : (
                   <select

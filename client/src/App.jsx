@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/panjar' element={<Panjar />}/>
-        <Route path='/panjar/hasil-panjar/:kecamatan' element={<HasilPanjar />}/>
+        <Route path='/panjar/hasil-panjar/' element={<HasilPanjar />}/>
       </Routes>
 
       <Footer />
