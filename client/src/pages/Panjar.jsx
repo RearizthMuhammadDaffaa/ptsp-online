@@ -118,6 +118,7 @@ const Panjar = () => {
                         setKec(e.target.options[e.target.selectedIndex].text);
                       }}
                     >
+                       <option value="" > Pilih Kecamatan</option>
                       {dataKecamatan.map((kec, i) => (
                         <option key={i} value={kec.radius}>
                           {kec.kecamatan}
@@ -189,6 +190,7 @@ const Panjar = () => {
                         );
                       }}
                     >
+                       <option value="" > Pilih Kecamatan</option>
                       {dataKecamatan.map((kec, i) => (
                         <option key={i} value={kec.radius}>
                           {kec.kecamatan}
@@ -248,6 +250,7 @@ const Panjar = () => {
                     className="input input-xs w-full custome-select "
                     onChange={(e)=>{
                       setKec("");
+                      setKecTergugat(null)
                       setHarga_P(e.target.value)
                     }}
                   />
@@ -257,8 +260,10 @@ const Panjar = () => {
                     onChange={(e) => {
                       setRadiusPenggugat(e.target.value);
                       setKec(e.target.options[e.target.selectedIndex].text);
+                      setKecTergugat(null)
                     }}
                   >
+                    <option value="" > Pilih Kecamatan</option>
                     {dataKecamatan.map((kec, i) => (
                       <option key={i} value={kec.radius}>
                         {kec.kecamatan}

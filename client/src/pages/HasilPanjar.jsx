@@ -32,6 +32,7 @@ const HasilPanjar = () => {
       : !hargaTergugat.panggilanTergugat ? hargaTergugat * 4 : hargaTergugat.panggilanTergugat * 4;
   const totalHarga =
     totalhargaPendaftaran + totalHargaPenggugat + totalHargaTergugat;
+  const totalHarga_2 = totalhargaPendaftaran + totalHargaPenggugat
   useEffect(() => {
     if (!location.state) {
       // Jika tidak ada state, redirect ke halaman kalkulator
@@ -179,7 +180,10 @@ const HasilPanjar = () => {
                     {formatRupiah(totalHargaPenggugat)}
                   </td>
                 </tr>
-                {/* row 11 */}
+                  {/* row 11 */}
+                {
+                  kecTergugat != null && (
+                    <>
                 <tr className="border-none">
                   <th className="border-none font-bold md:text-sm text-xs">
                     Biaya Panggilan{" "}
@@ -189,8 +193,8 @@ const HasilPanjar = () => {
                   <th></th>
                   <td className="text-right hasil-panjar-text md:text-sm text-xs"></td>
                 </tr>
-                {/* row 12 */}
-                <tr className="border-none">
+                   {/* row 12 */}
+                   <tr className="border-none">
                   <th className="border-none font-normal md:text-sm text-xs">
                     Lokasi Kecamatan
                   </th>
@@ -222,6 +226,12 @@ const HasilPanjar = () => {
                     {formatRupiah(totalHargaTergugat)}
                   </td>
                 </tr>
+                </>
+                  )
+                
+                }
+              
+             
                 <tr className="border-none"></tr>
                 {/* row 15 */}
                 <tr className="border-none">
@@ -231,7 +241,7 @@ const HasilPanjar = () => {
                   <th></th>
                   <th></th>
                   <td className="text-right hasil-panjar-text md:text-sm text-xs">
-                    {formatRupiah(totalHarga)}
+                    {kecTergugat != null ? formatRupiah(totalHarga) : formatRupiah(totalHarga_2)}
                   </td>
                 </tr>
               </tbody>
