@@ -12,6 +12,12 @@ body{
   outline: none;
   border: none;
   box-shadow: none; /* Jika ingin menghilangkan shadow default juga */
+ 
+}
+
+.custom-select{
+  background-color: white !important; /* Ensures a white background */
+  color: black !important; /* Ensures black text */
 }
 
 .hasil-panjar-text{
