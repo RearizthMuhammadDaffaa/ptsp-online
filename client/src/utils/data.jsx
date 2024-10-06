@@ -23,6 +23,12 @@ export const dataSlider = [
   {
     img:slider_3
   },
+  // {
+  //   img:slider_4
+  // },
+  // {
+  //   img:slider_5
+  // },
   
 ]
 

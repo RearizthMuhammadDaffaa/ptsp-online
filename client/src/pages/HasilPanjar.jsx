@@ -17,15 +17,22 @@ const HasilPanjar = () => {
  }
   const { hargaPenggugat, hargaTergugat, title, kec, kecTergugat,harga_P,harga_T } =
     location.state || {};
-  const totalhargaPendaftaran = typeof hargaPenggugat != "number" ?  ( hargaPenggugat.pendaftaran * 2 +
-    hargaPenggugat.redaksi +
-    hargaPenggugat.materai +
-    hargaPenggugat.proses) : hargaPendaftaran.totalHarga() 
-  ;
-  const totalHargaPenggugat = 
-    title == "istri"
-      ? !hargaPenggugat.panggilanPenggugat ? hargaPenggugat * 2 : hargaPenggugat.panggilanPenggugat * 2
-      : !hargaPenggugat.panggilanPenggugat ? hargaPenggugat * 3: hargaPenggugat.panggilanPenggugat * 3;
+   const  totalPendaftaran = hargaPenggugat.pendaftaran * 2 + hargaPenggugat.redaksi + hargaPenggugat.materai + hargaPenggugat.proses
+  const totalhargaPendaftaran = typeof hargaPenggugat != "number" && (title == "istri" || title == "suami") ?  totalPendaftaran : hargaPendaftaran.totalHarga();
+
+  function isPerkaraIstri(title) {
+    let total = 0;
+    if(title == "istri") {
+      return total = !hargaPenggugat.panggilanPenggugat ? hargaPenggugat * 2 : hargaPenggugat.panggilanPenggugat * 2;
+    } else if(title == "suami"){
+      return total = !hargaTergugat.panggilanTergugat ? hargaTergugat * 3 : hargaTergugat.panggilanTergugat * 3;
+    } else {
+     return  total = !hargaPenggugat.panggilanPenggugat ? hargaPenggugat * 4: hargaPenggugat.panggilanPenggugat * 4;
+    }
+  }
+
+
+  const totalHargaPenggugat = isPerkaraIstri(title);
   const totalHargaTergugat =
     title == "istri"
       ? !hargaTergugat.panggilanTergugat ? hargaTergugat * 3 : hargaTergugat.panggilanTergugat * 3
@@ -41,9 +48,13 @@ const HasilPanjar = () => {
   }, [location, navigate]);
 
   useEffect(() => {
+    console.log("new debug");
+    
     console.log(hargaPenggugat, hargaTergugat, title, kec, kecTergugat,harga_P,harga_T);
     console.log("hargaPenggugat: ", hargaPenggugat);
     console.log("hargaTergugat: ", hargaTergugat);
+    console.log("harga_p: ",harga_P);
+    
     console.log("totalHargaPenggugat: ", totalHargaPenggugat);
     console.log("totalHargaTergugat: ", totalHargaTergugat);
     console.log("totalHargaPendaftaran: ", totalhargaPendaftaran);
@@ -141,7 +152,7 @@ const HasilPanjar = () => {
                 <tr className="border-none">
                   <th className="border-none font-bold md:text-sm text-xs">
                     Biaya Panggilan{" "}
-                    {title == "istri" ? "Penggugat (2x)" : "Termohon (3x)"}
+                    {title == "istri" ? "Penggugat (2x)" : title == "suami" ?  "Termohon (3x)" : "Termohon (4x)" }
                   </th>
                   <th></th>
                   <th></th>
@@ -241,7 +252,7 @@ const HasilPanjar = () => {
                   <th></th>
                   <th></th>
                   <td className="text-right hasil-panjar-text md:text-sm text-xs">
-                    {kecTergugat != null ? formatRupiah(totalHarga) : formatRupiah(totalHarga_2)}
+                    {kecTergugat != null  ? formatRupiah(totalHarga) : formatRupiah(totalHarga_2)}
                   </td>
                 </tr>
               </tbody>
