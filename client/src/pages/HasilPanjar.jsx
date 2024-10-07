@@ -81,7 +81,7 @@ const HasilPanjar = () => {
 
   const generateDocument = (title)=> {
     if(title == 'suami'){
-        loadFile('https://ptsp-online.vercel.app/file_doc/suami.docx', function(error,content){
+        loadFile('../assets/file_doc/suami.docx', function(error,content){
           if(error){
             throw error;
           }
