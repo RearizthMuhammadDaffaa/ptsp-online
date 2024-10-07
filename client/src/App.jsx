@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Panjar from './pages/Panjar'
 import Footer from './components/Footer'
 import HasilPanjar from './pages/HasilPanjar'
+import SyaratBerperkara from './pages/SyaratBerperkara'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/panjar' element={<Panjar />}/>
         <Route path='/panjar/hasil-panjar/' element={<HasilPanjar />}/>
+        <Route path='/syarat-berperkara'  element={<SyaratBerperkara />}/>
       </Routes>
 
       <Footer />

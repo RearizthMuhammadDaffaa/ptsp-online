@@ -29,7 +29,7 @@ const Panjar = () => {
 
     // Jika hargaTergugat kosong, gunakan harga_t
     const finalHargaTergugat = hargaTergugat ? hargaTergugat :  harga_t ;
-    navigate(`/panjar/hasil-panjar/`, { state: { hargaPenggugat: finalHargaPenggugat, hargaTergugat: finalHargaTergugat, title, kec, kecTergugat, harga_p, harga_t } });
+    navigate(`/panjar/hasil-panjar/`, { state: { hargaPenggugat: finalHargaPenggugat, hargaTergugat: finalHargaTergugat, title, kec, kecTergugat ,area,areaTergugat} });
     
   };
 
