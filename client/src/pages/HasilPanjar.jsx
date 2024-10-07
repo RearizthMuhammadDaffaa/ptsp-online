@@ -113,7 +113,7 @@ const HasilPanjar = () => {
           saveAs(out, 'output.docx');
         })
     } else if (title == 'istri'){
-      loadFile('https://ptsp-online.vercel.app/file_doc/istri.docx', function(error,content){
+      loadFile('../assets/file_doc/istri.docx', function(error,content){
         if(error){
           throw error;
         }
@@ -145,7 +145,7 @@ const HasilPanjar = () => {
         saveAs(out, 'output.docx');
       })
     } else{
-      loadFile('https://ptsp-online.vercel.app/file_doc/permohonan.docx', function(error,content){
+      loadFile('../assets/file_doc/permohonan.docx', function(error,content){
         if(error){
           throw error;
         }
