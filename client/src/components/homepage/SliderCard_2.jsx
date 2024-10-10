@@ -1,8 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { dataSlider } from "../../utils/data";
+// import { dataSlider } from "../../utils/data";
+import axios from 'axios';
 const SliderCard_2 = () => {
   const [sliderNumber, setSliderNumber] = useState(0);
   const [position,setPosition] = useState(0)
+  const [dataSlider,setDataSlider] = useState([]);
+
+
+  const getDataSlider = async () =>{
+    try {
+      const response = await fetch('http://localhost:5000/sliders');
+      const slider = await response.json();
+      setDataSlider(slider);
+      console.log(slider);
+    } catch (error) {
+      console.log(error);
+      
+    }
+   
+    
+  }
+
+  useEffect(()=> {
+    getDataSlider();
+  },[])
+
 
   const handlePrev = () => {
     setPosition(position === 0 ?   -(dataSlider.length - 1) * 100 : position + 100)
@@ -59,7 +81,7 @@ const SliderCard_2 = () => {
             // }
         return(
          
-            <img src={data.img} key={i} alt={`data ke-${i}`} className={`w-full h-full flex-shrink-0`} />
+            <img src={data.url} key={i} alt={`data ke-${i}`} className={`w-full h-full flex-shrink-0`} />
           
         )}
         )}
