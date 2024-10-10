@@ -81,7 +81,7 @@ const HasilPanjar = () => {
 
   const generateDocument = (title)=> {
     if(title == 'suami'){
-        loadFile('../assets/file_doc/suami.docx', function(error,content){
+        loadFile('https://ptsp-online.vercel.app/file_doc/suami.docx', function(error,content){
           if(error){
             throw error;
           }
@@ -113,7 +113,7 @@ const HasilPanjar = () => {
           saveAs(out, 'output.docx');
         })
     } else if (title == 'istri'){
-      loadFile('../assets/file_doc/istri.docx', function(error,content){
+      loadFile('https://ptsp-online.vercel.app/file_doc/suami.docx', function(error,content){
         if(error){
           throw error;
         }
@@ -145,7 +145,7 @@ const HasilPanjar = () => {
         saveAs(out, 'output.docx');
       })
     } else{
-      loadFile('../assets/file_doc/permohonan.docx', function(error,content){
+      loadFile('https://ptsp-online.vercel.app/file_doc/suami.docx', function(error,content){
         if(error){
           throw error;
         }
