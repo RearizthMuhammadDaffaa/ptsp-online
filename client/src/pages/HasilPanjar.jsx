@@ -113,7 +113,7 @@ const HasilPanjar = () => {
           saveAs(out, 'output.docx');
         })
     } else if (title == 'istri'){
-      loadFile('https://ptsp-online.vercel.app/file_doc/suami.docx', function(error,content){
+      loadFile('https://ptsp-online.vercel.app/file_doc/istri.docx', function(error,content){
         if(error){
           throw error;
         }
@@ -145,7 +145,7 @@ const HasilPanjar = () => {
         saveAs(out, 'output.docx');
       })
     } else{
-      loadFile('https://ptsp-online.vercel.app/file_doc/suami.docx', function(error,content){
+      loadFile('https://ptsp-online.vercel.app/file_doc/permohonan.docx', function(error,content){
         if(error){
           throw error;
         }
@@ -317,7 +317,7 @@ const HasilPanjar = () => {
                   <th></th>
                   <th></th>
                   <td className="text-right hasil-panjar-text md:text-sm text-xs">
-                    {!kec ? "Luar Kabupaten Sumedang": kec}
+                    {!kecTergugat ? "Luar Kabupaten Sumedang": kecTergugat}
                   </td>
                 </tr>
                 {/* row 13 */}
