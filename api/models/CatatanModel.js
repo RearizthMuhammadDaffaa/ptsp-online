@@ -1,36 +1,30 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
-import Perkara from "./PerkaraModel.js";
-import Catatan from "./CatatanModel.js";
+import Syarat from "./SyaratModel.js";
 
 const {DataTypes} = Sequelize;
 
-const Syarat = db.define('syarat',{
-  id_syarat: {
+const Catatan = db.define('catatan',{
+  id_catatan: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  id_perkara: {
+  id_syarat: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  deskripsi_syarat: {
+  nama_catatan: {
     type: DataTypes.TEXT,
     allowNull: false
-  },
-  opsional: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
   }
-  
 },{
   freezeTableName:true
 });
 
 
-// Syarat.belongsTo(Perkara, { foreignKey: 'id_perkara' });
-Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
+// Catatan.belongsTo(Syarat, { foreignKey: 'id_syarat' });
+
 
 // (async () => {
 //   try {
@@ -47,8 +41,8 @@ Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
 //   Syarat.hasMany(models.Dokumen, { foreignKey: 'id_syarat' });
 // };
 
-export default Syarat;
+export default Catatan;
 
-// (async()=>{
-//   await db.sync();
-// })()
+(async()=>{
+  await db.sync();
+})()

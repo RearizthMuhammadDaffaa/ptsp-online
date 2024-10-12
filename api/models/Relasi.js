@@ -1,9 +1,18 @@
-import Perkara from './models/PerkaraModel.js';
-import Syarat from './models/SyaratModel.js';
-import db from './config/Database.js';
+import Perkara from "./PerkaraModel.js";
+import Syarat from "./SyaratModel.js";
+import SyaratTambahan from "./SyaratTambahanModel.js";
+import Catatan from "./CatatanModel.js";
+import db from "../config/Database.js";
 
-Perkara.hasMany(Syarat, { foreignKey: 'id_perkara' });
-Syarat.belongsTo(Perkara, { foreignKey: 'id_perkara' });
+Perkara.hasMany(Syarat, { foreignKey: "id_perkara" });
+Syarat.belongsTo(Perkara, { foreignKey: "id_perkara" });
+
+Perkara.hasMany(SyaratTambahan, { foreignKey: "id_perkara" });
+SyaratTambahan.belongsTo(Perkara, { foreignKey: "id_perkara" });
+
+Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
+Catatan.belongsTo(Syarat, { foreignKey: "id_syarat" });
+
 
 (async () => {
   try {
@@ -13,3 +22,11 @@ Syarat.belongsTo(Perkara, { foreignKey: 'id_perkara' });
     console.error('Error syncing database:', error);
   }
 })();
+
+// (async () => {
+//   try {
+//     await db.sync({ force: false }); // gunakan 'force: true' jika ingin drop table setiap kali sync (hati-hati)
+//   } catch (error) {
+//     console.error("Error syncing database:", error);
+//   }
+// })();

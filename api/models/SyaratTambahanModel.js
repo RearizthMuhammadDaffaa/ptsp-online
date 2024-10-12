@@ -1,12 +1,11 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 import Perkara from "./PerkaraModel.js";
-import Catatan from "./CatatanModel.js";
 
 const {DataTypes} = Sequelize;
 
-const Syarat = db.define('syarat',{
-  id_syarat: {
+const SyaratTambahan = db.define('syarat_tambahan',{
+  id_syarat_tambahan: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
@@ -15,31 +14,17 @@ const Syarat = db.define('syarat',{
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  deskripsi_syarat: {
+  deskripsi_syarat_tambahan: {
     type: DataTypes.TEXT,
     allowNull: false
-  },
-  opsional: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
-  }
-  
+  } 
 },{
   freezeTableName:true
 });
 
+// Perkara.hasMany(SyaratTambahan, { foreignKey: 'id_perkara' });
+// SyaratTambahan.belongsTo(Perkara, { foreignKey: 'id_perkara' });
 
-// Syarat.belongsTo(Perkara, { foreignKey: 'id_perkara' });
-Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
-
-// (async () => {
-//   try {
-//     await Syarat.drop();  // Menghapus tabel `syarat`
-//     console.log('Tabel Syarat berhasil dihapus');
-//   } catch (error) {
-//     console.error('Gagal menghapus tabel Syarat:', error.message);
-//   }
-// })();
 
 
 // Syarat.associate = function(models) {
@@ -47,7 +32,17 @@ Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
 //   Syarat.hasMany(models.Dokumen, { foreignKey: 'id_syarat' });
 // };
 
-export default Syarat;
+
+// (async () => {
+//   try {
+//     await SyaratTambahan.drop();  // Menghapus tabel `syarat`
+//     console.log('Tabel Syarat berhasil dihapus');
+//   } catch (error) {
+//     console.error('Gagal menghapus tabel Syarat:', error.message);
+//   }
+// })();
+
+export default SyaratTambahan;
 
 // (async()=>{
 //   await db.sync();

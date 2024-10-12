@@ -1,5 +1,6 @@
 import Perkara from "../models/PerkaraModel.js";
 import Syarat from "../models/SyaratModel.js";
+import SyaratTambahan from "../models/SyaratTambahanModel.js";
 
 
 
@@ -16,7 +17,20 @@ export const getPerkaras = async (req, res) => {
 export const getPerkarasAndSyarat = async (req, res) => {
   try {
     const response = await Perkara.findAll({
-      include: [Syarat]
+      include: [Syarat,SyaratTambahan]
+    });
+    res.json(response);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const getPerkarasAndSyaratById = async (req, res) => {
+  try {
+    const response = await Perkara.findOne({
+      where:{
+          id_perkara:req.params.id
+      },
+      include: [Syarat,SyaratTambahan]
     });
     res.json(response);
   } catch (error) {
@@ -28,7 +42,7 @@ export const getPerkaraById = async (req, res) => {
   try {
     const response = await Perkara.findOne({
       where: {
-        id: req.params.id,
+        id_perkara: req.params.id,
       },
       include: [Syarat]
     });
@@ -59,7 +73,7 @@ export const savePerkara = async (req, res) => {
 export const updatePerkara = async (req, res) => {
   const perkara = await Perkara.findOne({
     where: {
-      id: req.params.id,
+      id_perkara: req.params.id,
     },
   });
   const name = req.body.name
@@ -68,7 +82,7 @@ export const updatePerkara = async (req, res) => {
       name:name
     },{
       where:{
-        id:req.params.id
+        id_perkara:req.params.id
       }
     })
     res.status(201).json({msg:'Perkara Berhasil Diupdate'})
@@ -82,7 +96,7 @@ export const deletePerkara = async (req, res) => {
   try {
     await Perkara.destroy({
       where:{
-        id:req.params.id
+        id_perkara:req.params.id
       }
     })
     res.status(201).json({msg:'Perkara Berhasil Dihapus'})
