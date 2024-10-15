@@ -1,19 +1,19 @@
-import Slider from "../models/SliderModel.js";
+import Navbar from "../models/NavbarModel.js";
 import path from "path";
 import fs from "fs";
 
-export const getSliders = async (req, res) => {
+export const getNavbars = async (req, res) => {
   try {
-    const response = await Slider.findAll();
+    const response = await Navbar.findAll();
     res.json(response);
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const getSliderById = async (req, res) => {
+export const getNavbarById = async (req, res) => {
   try {
-    const response = await Slider.findOne({
+    const response = await Navbar.findOne({
       where: {
         id: req.params.id,
       },
@@ -34,10 +34,11 @@ function generateRandomLetter(length) {
   return result;
 }
 
-export const saveSlider = async (req, res) => {
+export const saveNavbar = async (req, res) => {
   if (req.files === null)
     return res.status(400).json({ msg: "Tidak ada File yang di Upload" });
-  const name = req.body.title;
+  const name = req.body.name;
+  const title = req.body.title;
   const file = req.files.file;
   const fileSize = file.data.length;
   const ext = path.extname(file.name);
@@ -54,7 +55,7 @@ export const saveSlider = async (req, res) => {
   file.mv(`./public/images/${fileName}`, async (err) => {
     if (err) return res.status(500).json({ msg: err.massage });
     try {
-      await Slider.create({ name: name, image: fileName, url: url });
+      await Navbar.create({ name: name,title:title, image: fileName, url: url });
       res.status(201).json({ msg: "Gambar berhasil ditambahkan" });
     } catch (error) {
       console.log(error.massage);
@@ -64,17 +65,17 @@ export const saveSlider = async (req, res) => {
  
 };
 
-export const updateSlider = async (req, res) => {
-  const slider = await Slider.findOne({
+export const updateNavbar = async (req, res) => {
+  const navbar = await Navbar.findOne({
     where: {
       id: req.params.id,
     },
   });
-  if (!slider) return res.status(404).json({ msg: "gambar tidak ditemukan" });
+  if (!navbar) return res.status(404).json({ msg: "gambar tidak ditemukan" });
 
   let fileName = "";
   if (!req.files || !req.files.file) {
-    fileName = slider.image;
+    fileName = navbar.image;
   } else {
     const file = req.files.file;
     const fileSize = file.data.length;
@@ -87,7 +88,7 @@ export const updateSlider = async (req, res) => {
         .json({ msg: "extension gambar salah harus png,jpg atau jpeg" });
     if (fileSize > 5000000)
       return res.status(422).json({ msg: "Gambar harus kurang dari 5MB" });
-    const filepath = `./public/images/${slider.image}`;
+    const filepath = `./public/images/${navbar.image}`;
   fs.unlinkSync(filepath);
 
   file.mv(`./public/images/${fileName}`,  (err) => {
@@ -95,10 +96,11 @@ export const updateSlider = async (req, res) => {
     
   });
   }
-  const name = req.body.title;
+  const name = req.body.name;
+  const title = req.body.title;
   const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
   try {
-      await Slider.update({name:name,image:fileName,url:url},{
+      await Navbar.update({name:name,title:title,image:fileName,url:url},{
         where:{
           id:req.params.id
         }
@@ -110,17 +112,17 @@ export const updateSlider = async (req, res) => {
   }
 };
 
-export const deleteSlider = async (req, res) => {
-  const slider = await Slider.findOne({
+export const deleteNavbar = async (req, res) => {
+  const navbar = await Navbar.findOne({
     where: {
       id: req.params.id,
     },
   });
-  if (!slider) return res.status(404).json({ msg: "gambar tidak ditemukan" });
+  if (!navbar) return res.status(404).json({ msg: "gambar tidak ditemukan" });
   try {
-    const filepath = `./public/images/${slider.image}`;
+    const filepath = `./public/images/${navbar.image}`;
     fs.unlinkSync(filepath);
-    await Slider.destroy({
+    await Navbar.destroy({
       where: {
         id: req.params.id,
       },

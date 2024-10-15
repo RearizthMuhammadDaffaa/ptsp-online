@@ -1,7 +1,7 @@
 import Perkara from "../models/PerkaraModel.js";
 import Syarat from "../models/SyaratModel.js";
 import SyaratTambahan from "../models/SyaratTambahanModel.js";
-
+import Catatan from "../models/CatatanModel.js";
 
 
 export const getPerkaras = async (req, res) => {
@@ -17,7 +17,7 @@ export const getPerkaras = async (req, res) => {
 export const getPerkarasAndSyarat = async (req, res) => {
   try {
     const response = await Perkara.findAll({
-      include: [Syarat,SyaratTambahan]
+      include: [Syarat,SyaratTambahan,Catatan]
     });
     res.json(response);
   } catch (error) {
@@ -30,7 +30,7 @@ export const getPerkarasAndSyaratById = async (req, res) => {
       where:{
           id_perkara:req.params.id
       },
-      include: [Syarat,SyaratTambahan]
+      include: [Syarat,SyaratTambahan,Catatan]
     });
     res.json(response);
   } catch (error) {

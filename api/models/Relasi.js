@@ -10,18 +10,18 @@ Syarat.belongsTo(Perkara, { foreignKey: "id_perkara" });
 Perkara.hasMany(SyaratTambahan, { foreignKey: "id_perkara" });
 SyaratTambahan.belongsTo(Perkara, { foreignKey: "id_perkara" });
 
-Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
-Catatan.belongsTo(Syarat, { foreignKey: "id_syarat" });
+Perkara.hasMany(Catatan, { foreignKey: "id_perkara" });
+Catatan.belongsTo(Perkara, { foreignKey: "id_perkara" });
 
 
-(async () => {
-  try {
-    await db.sync();
-    console.log('Database synced successfully');
-  } catch (error) {
-    console.error('Error syncing database:', error);
-  }
-})();
+// (async () => {
+//   try {
+//     await db.sync();
+//     console.log('Database synced successfully');
+//   } catch (error) {
+//     console.error('Error syncing database:', error);
+//   }
+// })();
 
 // (async () => {
 //   try {

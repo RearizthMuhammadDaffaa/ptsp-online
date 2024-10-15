@@ -30,7 +30,7 @@ const Syarat = db.define('syarat',{
 
 
 // Syarat.belongsTo(Perkara, { foreignKey: 'id_perkara' });
-Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
+// Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
 
 // (async () => {
 //   try {

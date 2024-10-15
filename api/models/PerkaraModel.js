@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 import Syarat from "./SyaratModel.js";
 import SyaratTambahan from "./SyaratTambahanModel.js";
+import Catatan from "./CatatanModel.js";
 
 const {DataTypes} = Sequelize;
 
@@ -21,6 +22,7 @@ const Perkara = db.define('perkara',{
 
 Perkara.hasMany(Syarat, { foreignKey: 'id_perkara' });
 Perkara.hasMany(SyaratTambahan, { foreignKey: 'id_perkara' });
+Perkara.hasMany(Catatan, { foreignKey: 'id_perkara' });
 
 // Perkara.associate = function(models) {
 //   Perkara.hasMany(Syarat, { foreignKey: 'id_perkara' });
@@ -39,6 +41,6 @@ Perkara.hasMany(SyaratTambahan, { foreignKey: 'id_perkara' });
 
 export default Perkara;
 
-(async()=>{
-  await db.sync();
-})()
+// (async()=>{
+//   await db.sync();
+// })()

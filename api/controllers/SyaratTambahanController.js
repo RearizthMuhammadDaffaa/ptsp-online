@@ -70,7 +70,7 @@ export const deleteSyaratTambahan = async (req, res) => {
         id_syarat_tambahan:req.params.id
       }
     })
-    res.status(201).json({msg:'SyaratTambahan Berhasil Dihapus'})
+    res.status(201).json({msg:'Syarat Tambahan Berhasil Dihapus'})
   } catch (error) {
     console.log(error.message);
     

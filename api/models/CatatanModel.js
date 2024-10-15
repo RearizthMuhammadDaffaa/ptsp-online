@@ -10,7 +10,7 @@ const Catatan = db.define('catatan',{
     primaryKey: true,
     autoIncrement: true
   },
-  id_syarat: {
+  id_perkara: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
@@ -28,7 +28,7 @@ const Catatan = db.define('catatan',{
 
 // (async () => {
 //   try {
-//     await Syarat.drop();  // Menghapus tabel `syarat`
+//     await Catatan.drop();  // Menghapus tabel `syarat`
 //     console.log('Tabel Syarat berhasil dihapus');
 //   } catch (error) {
 //     console.error('Gagal menghapus tabel Syarat:', error.message);
@@ -43,6 +43,6 @@ const Catatan = db.define('catatan',{
 
 export default Catatan;
 
-(async()=>{
-  await db.sync();
-})()
+// (async()=>{
+//   await db.sync();
+// })()
