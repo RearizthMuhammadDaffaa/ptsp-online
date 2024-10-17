@@ -11,6 +11,7 @@ import NavbarRoute from "./routes/NavbarRoute.js";
 import VideoEmbedRoute from "./routes/VideoEmbedRoute.js";
 
 
+
 const app = express();
 
 app.use(cors());
