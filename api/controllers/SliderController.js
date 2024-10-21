@@ -176,6 +176,7 @@ export const saveSlider = async (req, res) => {
 };
 
 export const updateSlider = async (req, res) => {
+ 
   const slider = await Slider.findOne({
     where: {
       id: req.params.id,
@@ -185,7 +186,7 @@ export const updateSlider = async (req, res) => {
   if (!slider) return res.status(404).json({ msg: "Gambar tidak ditemukan" });
 
   let fileName = slider.image; // Menggunakan public_id dari Cloudinary
-
+  let url = slider.url
   if (req.files && req.files.file) {
     const file = req.files.file;
     const fileSize = file.data.length;
@@ -224,7 +225,7 @@ export const updateSlider = async (req, res) => {
 
       const result = await uploadFromBuffer(file.data);
       fileName = result.public_id;
-
+      url = cloudinary.url(fileName);
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -232,7 +233,7 @@ export const updateSlider = async (req, res) => {
 
   const name = req.body.name;
   const title = req.body.title;
-  const url = cloudinary.url(fileName);
+  
 
   try {
     await Slider.update(

@@ -188,7 +188,7 @@ export const updateNavbar = async (req, res) => {
   if (!navbar) return res.status(404).json({ msg: "Gambar tidak ditemukan" });
 
   let fileName = navbar.image; // Menggunakan public_id dari Cloudinary
-
+  let url = navbar.url
   if (req.files && req.files.file) {
     const file = req.files.file;
     const fileSize = file.data.length;
@@ -227,7 +227,7 @@ export const updateNavbar = async (req, res) => {
 
       const result = await uploadFromBuffer(file.data);
       fileName = result.public_id;
-
+      url = cloudinary.url(fileName);
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -235,7 +235,7 @@ export const updateNavbar = async (req, res) => {
 
   const name = req.body.name;
   const title = req.body.title;
-  const url = cloudinary.url(fileName);
+  
 
   try {
     await Navbar.update(
