@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.cjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,13 +11,22 @@
   "description": "",
   "type": "module",
   "dependencies": {
+    "@getbrevo/brevo": "^2.2.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "env": "^0.0.2",
     "express": "^4.21.1",
     "express-fileupload": "^1.5.1",
     "gitignore": "^0.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "mailtrap": "^3.4.0",
     "mysql2": "^3.11.3",
-    "sequelize": "^6.37.4"
+    "nodemailer": "^6.9.15",
+    "sequelize": "^6.37.4",
+    "streamifier": "^0.1.1"
   }
 }

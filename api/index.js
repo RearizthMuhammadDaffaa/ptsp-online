@@ -9,6 +9,7 @@ import CatatanRoute from "./routes/CatatanRoute.js";
 import MenuRoute from "./routes/MenuRoute.js";
 import NavbarRoute from "./routes/NavbarRoute.js";
 import VideoEmbedRoute from "./routes/VideoEmbedRoute.js";
+import AuthRoute from "./routes/AuthRoute.js";
 
 
 
@@ -25,6 +26,7 @@ app.use(CatatanRoute);
 app.use(MenuRoute);
 app.use(NavbarRoute);
 app.use(VideoEmbedRoute);
+app.use(AuthRoute);
 app.use(express.static("public"));
 app.listen(5000,()=> console.log("server Up and Running"))
 

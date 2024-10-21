@@ -1,6 +1,8 @@
 import Menu from "../models/MenuModel.js";
 import path from "path";
 import fs from "fs";
+import cloudinary from "../config/Cloudinary.js";
+import streamifier from 'streamifier'
 
 export const getMenus = async (req, res) => {
   try {
@@ -34,34 +36,142 @@ function generateRandomLetter(length) {
   return result;
 }
 
-export const saveMenu = async (req, res) => {
-  if (req.files === null)
-    return res.status(400).json({ msg: "Tidak ada File yang di Upload" });
-  const name = req.body.title;
-  const file = req.files.file;
-  const fileSize = file.data.length;
-  const ext = path.extname(file.name);
-  const fileName = generateRandomLetter(15) + ext;
-  const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
-  const allowedType = [".png", ".jpg", "jpeg"];
-  if (!allowedType.includes(ext.toLocaleLowerCase()))
-    return res
-      .status(422)
-      .json({ msg: "extension gambar salah harus png,jpg atau jpeg" });
-  if (fileSize > 5000000)
-    return res.status(422).json({ msg: "Gambar harus kurang dari 5MB" });
+// export const saveMenu = async (req, res) => {
+//   if (req.files === null)
+//     return res.status(400).json({ msg: "Tidak ada File yang di Upload" });
+//   const name = req.body.title;
+//   const file = req.files.file;
+//   const fileSize = file.data.length;
+//   const ext = path.extname(file.name);
+//   const fileName = generateRandomLetter(15) + ext;
+//   const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
+//   const allowedType = [".png", ".jpg", "jpeg"];
+//   if (!allowedType.includes(ext.toLocaleLowerCase()))
+//     return res
+//       .status(422)
+//       .json({ msg: "extension gambar salah harus png,jpg atau jpeg" });
+//   if (fileSize > 5000000)
+//     return res.status(422).json({ msg: "Gambar harus kurang dari 5MB" });
 
-  file.mv(`./public/images/${fileName}`, async (err) => {
-    if (err) return res.status(500).json({ msg: err.massage });
-    try {
-      await Menu.create({ name: name, image: fileName, url: url });
-      res.status(201).json({ msg: "Gambar berhasil ditambahkan" });
-    } catch (error) {
-      console.log(error.massage);
-    }
-  });
+//   file.mv(`./public/images/${fileName}`, async (err) => {
+//     if (err) return res.status(500).json({ msg: err.massage });
+//     try {
+//       await Menu.create({ name: name, image: fileName, url: url });
+//       res.status(201).json({ msg: "Gambar berhasil ditambahkan" });
+//     } catch (error) {
+//       console.log(error.massage);
+//     }
+//   });
 
  
+// };
+
+// export const updateMenu = async (req, res) => {
+//   const menu = await Menu.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   });
+//   if (!menu) return res.status(404).json({ msg: "gambar tidak ditemukan" });
+
+//   let fileName = "";
+//   if (!req.files || !req.files.file) {
+//     fileName = menu.image;
+//   } else {
+//     const file = req.files.file;
+//     const fileSize = file.data.length;
+//     const ext = path.extname(file.name);
+//     fileName = generateRandomLetter(15) + ext;
+//     const allowedType = [".png", ".jpg", "jpeg"];
+//     if (!allowedType.includes(ext.toLocaleLowerCase()))
+//       return res
+//         .status(422)
+//         .json({ msg: "extension gambar salah harus png,jpg atau jpeg" });
+//     if (fileSize > 5000000)
+//       return res.status(422).json({ msg: "Gambar harus kurang dari 5MB" });
+//     const filepath = `./public/images/${menu.image}`;
+//   fs.unlinkSync(filepath);
+
+//   file.mv(`./public/images/${fileName}`,  (err) => {
+//     if (err) return res.status(500).json({ msg: err.massage });
+    
+//   });
+//   }
+//   const name = req.body.title;
+//   const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
+//   try {
+//       await Menu.update({name:name,image:fileName,url:url},{
+//         where:{
+//           id:req.params.id
+//         }
+//       })
+//       res.status(200).json({msg:"gambar berhasil di update"})
+//   } catch (error) {
+//     console.log(error.message);
+  
+//   }
+// };
+
+// export const deleteMenu = async (req, res) => {
+//   const menu = await Menu.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   });
+//   if (!menu) return res.status(404).json({ msg: "gambar tidak ditemukan" });
+//   try {
+//     const filepath = `./public/images/${menu.image}`;
+//     fs.unlinkSync(filepath);
+//     await Menu.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     res.status(200).json({ msg: "gambar berhasil dihapus" });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+
+
+export const saveMenu = async (req, res) => {
+  if (!req.files || !req.files.file) {
+    return res.status(400).json({ msg: "Tidak ada file yang diunggah." });
+  }
+
+  const title = req.body.title;
+  const file = req.files.file; // Akses file yang diunggah
+  const ext = path.extname(file.name);
+  const fileName = generateRandomLetter(15) + ext;
+  const allowedType = [".png", ".jpg", ".jpeg"];
+
+  if (!allowedType.includes(ext.toLowerCase())) {
+    return res.status(422).json({ msg: "Jenis file salah. Hanya menerima png, jpg, atau jpeg." });
+  }
+
+  if (file.size > 5000000) {
+    return res.status(422).json({ msg: "Ukuran file terlalu besar. Maksimal 5MB." });
+  }
+
+  try {
+    // Upload file langsung dari buffer
+    const result = await cloudinary.uploader.upload(`data:${file.mimetype};base64,${file.data.toString('base64')}`, {
+      public_id: fileName,
+      folder: "ptsp-pa", // Tentukan folder di Cloudinary
+    });
+
+    // Simpan informasi ke database
+    await Menu.create({
+      name: title,
+      image: result.public_id,
+      url: result.secure_url,
+    });
+
+    res.status(201).json({ msg: "Gambar berhasil ditambahkan." });
+  } catch (error) {
+    console.log("Error:", error.message);
+    res.status(500).json({ msg: "Terjadi kesalahan pada server." });
+  }
 };
 
 export const updateMenu = async (req, res) => {
@@ -70,45 +180,75 @@ export const updateMenu = async (req, res) => {
       id: req.params.id,
     },
   });
-  if (!menu) return res.status(404).json({ msg: "gambar tidak ditemukan" });
 
-  let fileName = "";
-  if (!req.files || !req.files.file) {
-    fileName = menu.image;
-  } else {
+  if (!menu) return res.status(404).json({ msg: "Gambar tidak ditemukan" });
+
+  let fileName = menu.image; // Menggunakan public_id dari Cloudinary
+
+  if (req.files && req.files.file) {
     const file = req.files.file;
     const fileSize = file.data.length;
     const ext = path.extname(file.name);
-    fileName = generateRandomLetter(15) + ext;
     const allowedType = [".png", ".jpg", "jpeg"];
-    if (!allowedType.includes(ext.toLocaleLowerCase()))
+
+    if (!allowedType.includes(ext.toLowerCase()))
       return res
         .status(422)
-        .json({ msg: "extension gambar salah harus png,jpg atau jpeg" });
+        .json({ msg: "Ekstensi gambar salah, harus png, jpg, atau jpeg" });
+
     if (fileSize > 5000000)
       return res.status(422).json({ msg: "Gambar harus kurang dari 5MB" });
-    const filepath = `./public/images/${menu.image}`;
-  fs.unlinkSync(filepath);
 
-  file.mv(`./public/images/${fileName}`,  (err) => {
-    if (err) return res.status(500).json({ msg: err.massage });
-    
-  });
+    try {
+      // Hapus gambar lama dari Cloudinary
+      await cloudinary.uploader.destroy(menu.image);
+
+      // Upload gambar baru ke Cloudinary menggunakan streamifier
+      const uploadFromBuffer = (fileBuffer) => {
+        return new Promise((resolve, reject) => {
+          const uploadStream = cloudinary.uploader.upload_stream(
+            {
+              public_id: generateRandomLetter(15),
+              folder: "ptsp-pa",
+            },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          );
+
+          streamifier.createReadStream(fileBuffer).pipe(uploadStream);
+        });
+      };
+
+      const result = await uploadFromBuffer(file.data);
+      fileName = result.public_id;
+
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
   }
-  const name = req.body.title;
-  const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
+
+  const name = req.body.name;
+  const title = req.body.title;
+  const url = cloudinary.url(fileName);
+
   try {
-      await Menu.update({name:name,image:fileName,url:url},{
-        where:{
-          id:req.params.id
-        }
-      })
-      res.status(200).json({msg:"gambar berhasil di update"})
+    await Menu.update(
+      { name: title, image: fileName, url: url },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "Gambar berhasil diupdate" });
   } catch (error) {
     console.log(error.message);
-  
+    res.status(500).json({ msg: "Gagal update data" });
   }
 };
+
 
 export const deleteMenu = async (req, res) => {
   const menu = await Menu.findOne({
@@ -116,17 +256,23 @@ export const deleteMenu = async (req, res) => {
       id: req.params.id,
     },
   });
-  if (!menu) return res.status(404).json({ msg: "gambar tidak ditemukan" });
+
+  if (!menu) return res.status(404).json({ msg: "Gambar tidak ditemukan" });
+
   try {
-    const filepath = `./public/images/${menu.image}`;
-    fs.unlinkSync(filepath);
+    // Hapus gambar dari Cloudinary
+    await cloudinary.uploader.destroy(menu.image);
+
+    // Hapus entri di database
     await Menu.destroy({
       where: {
         id: req.params.id,
       },
     });
-    res.status(200).json({ msg: "gambar berhasil dihapus" });
+
+    res.status(200).json({ msg: "Gambar berhasil dihapus" });
   } catch (error) {
     console.log(error.message);
+    res.status(500).json({ msg: "Gagal menghapus gambar" });
   }
 };
