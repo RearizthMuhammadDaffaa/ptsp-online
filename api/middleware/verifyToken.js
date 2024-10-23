@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
- const verifyToken = (requiredRole = 'user') => async (req, res, next) => {
+ const verifyToken = (allowedRoles = ['user']) => async (req, res, next) => {
   const token = req.cookies.token;
   
   if (!token) {
@@ -22,12 +22,14 @@ import User from '../models/User.js';
     }
 
     // Cek apakah user memiliki role yang diperlukan
-    if (requiredRole && user.role !== requiredRole && user.role !== 'admin') {
+    if (!allowedRoles.includes(user.role)) {
       return res.status(403).json({ success: false, message: 'Forbidden - insufficient permissions' });
     }
 
+    
     req.userId = decoded.userId;
     req.userRole = user.role;  // simpan role untuk keperluan lebih lanjut
+    req.userName = user.name;
     next();
   } catch (error) {
     console.log('Error in verifyToken ', error);

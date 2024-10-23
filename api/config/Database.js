@@ -10,24 +10,24 @@ dotenv.config();
 //   dialect:'mysql',
 //   dialectModule:mysql2
 // });
-const db = new Sequelize(
-  "sql12738419",
-  "sql12738419",
- "rLf2f668yd",
-  {
-  host:"sql12.freesqldatabase.com",
-  dialect:'mysql',
-  dialectModule:mysql2
-});
 // const db = new Sequelize(
-//   "rianapri_ptsp_pa_sumedang",
-//   "rianapri_daffaa_77",
-//  "daffaa123456daffaa;;",
+//   "sql12738419",
+//   "sql12738419",
+//  "rLf2f668yd",
 //   {
-//   host:"api-ptsp.rianaprilyawan.web.id",
+//   host:"sql12.freesqldatabase.com",
 //   dialect:'mysql',
 //   dialectModule:mysql2
 // });
+const db = new Sequelize(
+  "rianapri_ptsp_pa_sumedang",
+  "rianapri_daffaa_77",
+ "daffaa123456daffaa;;",
+  {
+  host:"api-ptsp.rianaprilyawan.web.id",
+  dialect:'mysql',
+  dialectModule:mysql2
+});
 // const db = new Sequelize(
 //   "pstp-pa-sumedang",
 //   "root",

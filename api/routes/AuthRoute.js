@@ -12,7 +12,7 @@ import  verifyToken  from "../middleware/verifyToken.js";
 
 const router = express.Router();
 // route
-router.get("/check-auth", verifyToken, checkAuth);
+router.get("/check-auth", verifyToken(['user','admin','superadmin']), checkAuth);
 
 router.post("/signup", signup);
 router.post("/login", login);
