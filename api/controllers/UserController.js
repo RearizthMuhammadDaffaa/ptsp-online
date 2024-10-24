@@ -64,7 +64,7 @@ export const updateUser = async (req,res) =>{
   if(!user) return res.status(404).json({msg:"User Not Found"});
   const {name,email,password,role} = req.body;
   let hashPassword;
-  if(password === "" || password === null){
+  if(!password || typeof password !== 'string' || password.trim() === ""){
     hashPassword = user.password
   }else{
     hashPassword =  await bcryptjs.hash(password, 10);
