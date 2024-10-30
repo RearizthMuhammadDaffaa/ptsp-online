@@ -19,7 +19,7 @@ import UserRoute from "./routes/UserRoute.js";
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5173','https://ptsp-pa-admin.vercel.app' ,'https://ptsp-online.vercel.app/' ],  // Sesuaikan dengan URL React app
+  origin: ['http://localhost:5173','http://localhost:5174','https://ptsp-pa-admin.vercel.app' ,'https://ptsp-online.vercel.app/' ],  // Sesuaikan dengan URL React app
   credentials: true  // Izinkan cookie untuk dikirim
 }));
 app.use(express.json());

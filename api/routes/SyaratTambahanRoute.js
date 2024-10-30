@@ -6,13 +6,14 @@ import {
   updateSyaratTambahan,
   deleteSyaratTambahan
 } from "../controllers/SyaratTambahanController.js";
+import verifyToken from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
 router.get('/syarat-tambahan',getSyaratTambahans);
 router.get('/syarat-tambahan/:id',getSyaratTambahanById);
-router.post('/syarat-tambahan',saveSyaratTambahan);
-router.patch('/syarat-tambahan/:id',updateSyaratTambahan);
-router.delete('/syarat-tambahan/:id',deleteSyaratTambahan);
+router.post('/syarat-tambahan', verifyToken(['superadmin','admin']),saveSyaratTambahan);
+router.patch('/syarat-tambahan/:id',verifyToken(['superadmin','admin']),updateSyaratTambahan);
+router.delete('/syarat-tambahan/:id',verifyToken(['superadmin','admin']),deleteSyaratTambahan);
 
 export default router;

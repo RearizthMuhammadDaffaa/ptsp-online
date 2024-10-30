@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { dataSyarat } from "../../utils/data";
+import axios from "axios";
 
 const ModalSyarat = ({ id }) => {
+  const [dataPerkara, setDataPerkara] = useState([]);
+  const getDataPerkara = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API}syarat-perkara/${id}`
+      );
+      setDataPerkara(response.data);
+      console.log(dataPerkara);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getDataPerkara();
+  }, [id]);
   return (
     <dialog id={`my_modal_${id}`} className="modal">
       <div className="bg-white md:w-[80%] h-full md:h-auto relative p-5 rounded-md overflow-y-auto">
@@ -15,35 +32,30 @@ const ModalSyarat = ({ id }) => {
           <h1 className="text-green-primary font-bold text-xl mt-6">
             Syarat Berperkara
           </h1>
-          <h1 className="font-bold text-base mt-3">{dataSyarat[id].title_1}</h1>
+          <h1 className="font-bold text-base mt-3">test</h1>
           <ol start="1" className="ml-5">
-            {dataSyarat[id].syarat_list.map((data,i)=>(
-               <li key={i}>
-                {data}
-             </li>
+            {dataPerkara.syarats?.map((data, i) => (
+              <li key={i}>{data.deskripsi_syarat}</li>
             ))}
-           
           </ol>
-          {dataSyarat[id].title_2 && (
-                <>
-                <h1 className="font-bold text-base mt-3">{dataSyarat[id].title_2}</h1>
+          {Array.isArray(dataPerkara.syarat_tambahans) &&
+            dataPerkara.syarat_tambahans.length > 0 && (
+              <>
+                <h1 className="font-bold text-base mt-3">test</h1>
                 <ol start="1" className="ml-5">
-                  {dataSyarat[id].syarat_list2.map((data,i)=>(
-                       <li key={i}>{data}</li>
+                  {dataPerkara.syarat_tambahans.map((data, i) => (
+                    <li key={i}>{data.deskripsi_syarat_tambahan}</li>
                   ))}
-                 
-              
                 </ol>
-                </>
-          )}
-        
-         
+              </>
+            )}
+
           <h1 className="font-bold text-base mt-3">Catatan</h1>
           <ul>
-            {dataSyarat[id].catatan.map((data,i)=> (
-                <li key={i}>{data}</li>
-            ))}
-            
+            {Array.isArray(dataPerkara.catatans) &&
+              dataPerkara.catatans.map((data, i) => (
+                <li key={i}>{data.nama_catatan}</li>
+              ))}
           </ul>
           {/* Center the buttons */}
           <div className="flex justify-center gap-4 mt-5">

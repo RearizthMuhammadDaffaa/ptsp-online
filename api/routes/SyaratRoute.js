@@ -6,13 +6,14 @@ import {
   updateSyarat,
   deleteSyarat
 } from "../controllers/SyaratController.js";
+import verifyToken from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
 router.get('/syarat',getSyarats);
 router.get('/syarat/:id',getSyaratById);
-router.post('/syarat',saveSyarat);
-router.patch('/syarat/:id',updateSyarat);
-router.delete('/syarat/:id',deleteSyarat);
+router.post('/syarat',verifyToken(['superadmin','admin']),saveSyarat);
+router.patch('/syarat/:id',verifyToken(['superadmin','admin']),updateSyarat);
+router.delete('/syarat/:id',verifyToken(['superadmin','admin']),deleteSyarat);
 
 export default router;

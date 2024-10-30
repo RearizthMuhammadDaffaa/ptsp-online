@@ -9,7 +9,7 @@ const SliderCard_2 = () => {
 
   const getDataSlider = async () =>{
     try {
-      const response = await fetch('http://localhost:5000/sliders');
+      const response = await fetch(`${import.meta.env.VITE_API}sliders`);
       const slider = await response.json();
       setDataSlider(slider);
       console.log(slider);
@@ -59,7 +59,7 @@ const SliderCard_2 = () => {
   },[position])
   return (
     <div className=''>
-      <div className='flex relative md:h-[220px] lg:h-[443px] h-[130px]'>
+      <div className='flex relative md:h-[220px] lg:h-[443px] h-[220px]'>
       {/* <img src={dataSlider[sliderNumber].img}  alt={`data ke-${1}`} className={`w-full h-full`} /> */}
       <div
         className='flex transition-transform duration-500 ease-in-out'
