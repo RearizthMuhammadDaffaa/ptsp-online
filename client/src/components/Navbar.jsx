@@ -25,11 +25,11 @@ const Navbar = () => {
     <div className="px-[10px] md:px-[50px] py-2 flex  gap-[15px] bg-green-primary shadow-slate-100 justify-between items-center">
       <Link to='/'>
       
-     <img src={navbar[0].url} alt="" className=" md:w-full md:h-full w-[100px] bg-green-primary"/>
+     {/* <img src={navbar[0].url} alt="" className=" md:w-full md:h-full w-[100px] bg-green-primary"/> */}
       </Link>
      <div className="container flex flex-col  mr-auto text-left leading-tight justify-center">
-      <h1 className="font-bold text-white">{navbar[0].name}</h1>
-      <h1 className="text-sm text-white">{navbar[0].title}</h1>
+      {/* <h1 className="font-bold text-white">{navbar[0].name}</h1> */}
+      {/* <h1 className="text-sm text-white">{navbar[0].title}</h1> */}
      </div>
      <div className="hidden md:flex justify-center items-center gap-10">
       <Link className="text-white">Home</Link>
