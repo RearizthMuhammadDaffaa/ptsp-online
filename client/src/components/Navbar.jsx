@@ -32,7 +32,7 @@ const Navbar = () => {
 
   useEffect(() => {
     getDataNavbar();
-    console.log(auth.user);
+    // console.log(auth?.user);
     
   }, []);
 
