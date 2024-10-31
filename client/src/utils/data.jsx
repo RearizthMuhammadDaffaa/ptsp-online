@@ -44,7 +44,7 @@ export const dataMenu = [
   {
     img: menuIcon_3,
     title: "Chat Online",
-    link: "panjar",
+    link: "chat",
   },
 ];
 

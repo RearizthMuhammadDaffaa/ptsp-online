@@ -162,6 +162,34 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
+export const forgotPasswordUser = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(400).json({ success: false, message: 'User not found' });
+    }
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    const resetTokenExpiresAt = Date.now() + 1 * 60 * 60 * 1000; // 1 hour
+
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpiresAt = resetTokenExpiresAt;
+
+    await user.save();
+
+    // Send email
+    await sendPasswordResetEmail(user.email, `${process.env.CLIENT_URL_USER}/reset-password/${resetToken}`);
+
+    res.status(200).json({ success: true, message: 'Password reset link sent to your email' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 // Reset Password Controller
 export const resetPassword = async (req, res) => {
   try {
