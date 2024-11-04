@@ -2,7 +2,6 @@ import saveMessage from "../repositories/chatRepository.js";
 
 const setupChatSocket = (io) => {
   io.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
 
     // Join a chat room
     socket.on('joinRoom', (chatId) => {

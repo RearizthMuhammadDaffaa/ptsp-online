@@ -26,7 +26,7 @@ const io = new Server(server, {
       'http://localhost:5173',
       'http://localhost:5174',
       'https://ptsp-pa-admin.vercel.app',
-      'https://ptsp-online.vercel.app'
+      'https://ptsp-pa-admin.vercel.app'
     ],
     methods: ["GET", "POST"],
   },
