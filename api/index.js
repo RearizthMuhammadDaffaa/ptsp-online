@@ -29,6 +29,7 @@ const io = new Server(server, {
       'https://ptsp-online.vercel.app'
     ],
     methods: ["GET", "POST"],
+    credentials: true
   },
 });
 
@@ -47,6 +48,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(FileUpload());
+
 app.use(SliderRoute);
 app.use(PerkaraRoute);
 app.use(SyaratRoute);
