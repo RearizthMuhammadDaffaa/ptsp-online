@@ -13,10 +13,27 @@ import NavbarRoute from "./routes/NavbarRoute.js";
 import VideoEmbedRoute from "./routes/VideoEmbedRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
 import UserRoute from "./routes/UserRoute.js";
-
-
+import MessageRoute from "./routes/MessageRoute.js";
+import { Server } from "socket.io";
+import setupChatSocket from "./socket/chatSocket.js";
+import http from "http";
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: [ 
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'https://ptsp-pa-admin.vercel.app',
+      'https://ptsp-online.vercel.app'
+    ],
+    methods: ["GET", "POST"],
+  },
+});
+
+// Initialize Socket.io with chat setup
+setupChatSocket(io);
 
 app.use(cors({
   origin: [
@@ -40,9 +57,10 @@ app.use(NavbarRoute);
 app.use(VideoEmbedRoute);
 app.use(AuthRoute);
 app.use(UserRoute);
+app.use(MessageRoute);
 
 
 app.use(express.static("public"));
-app.listen(5000,()=> console.log("server Up and Running"))
+server.listen(5000,()=> console.log("server Up and Running"))
 
 

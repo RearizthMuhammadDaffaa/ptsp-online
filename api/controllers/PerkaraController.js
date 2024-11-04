@@ -57,10 +57,14 @@ export const getPerkaraById = async (req, res) => {
 export const savePerkara = async (req, res) => {
    
   const name = req.body.name;
+  const title1 = req.body.title1;
+  const title2 = req.body.title2;
 
   try {
     await Perkara.create({
-      name:name
+      name:name,
+      title1:title1,
+      title2:title2
     })
     res.status(201).json({msg:'Perkara Berhasil Ditambahkan'})
   } catch (error) {
@@ -77,9 +81,13 @@ export const updatePerkara = async (req, res) => {
     },
   });
   const name = req.body.name
+  const title1 = req.body.title1;
+  const title2 = req.body.title2;
   try {
     await Perkara.update({
-      name:name
+      name:name,
+      title1:title1,
+      title2:title2
     },{
       where:{
         id_perkara:req.params.id

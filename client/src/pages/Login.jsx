@@ -45,9 +45,9 @@ const handleSubmit = async (e) => {
       // console.log(JSON.stringify(response));
       // const accessToken = response?.data?.accessToken;
       const roles = [response?.data?.user?.role];
-
+      const name = response?.data?.user?.name;
       
-      setAuth({ user, roles });
+      setAuth({ user, roles,name });
       localStorage.setItem('authuser', JSON.stringify({ user, roles }));
       setUser('');
       setPwd('');

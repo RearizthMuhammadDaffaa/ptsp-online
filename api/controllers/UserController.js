@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcryptjs from 'bcryptjs';
 import crypto from 'crypto';
+import { response } from "express";
 
 export const getUsers = async(req,res) =>{
   try {
@@ -21,6 +22,20 @@ export const getUsersById = async (req,res) =>{
         id: req.params.id
       }
     });
+    res.status(200).json(response)
+  } catch (error) {
+    res.status(500).json({msg:error.message})
+  }
+}
+export const getUsersRoleUser = async (req,res) =>{
+  try {
+     const role = req.query.role
+    const response = await User.findAll({
+      where:{
+        role: role
+      }
+    });
+    res.json(response);
     res.status(200).json(response)
   } catch (error) {
     res.status(500).json({msg:error.message})

@@ -12,10 +12,19 @@ const Perkara = db.define('perkara',{
     primaryKey: true,
     autoIncrement: true
   },
-  name: DataTypes.STRING
+  name: DataTypes.STRING,
+  title1: {
+    type: DataTypes.STRING, // Menambahkan kolom title1
+    allowNull: true, // Anda bisa mengatur ini sesuai kebutuhan
+  },
+  title2: {
+    type: DataTypes.STRING, // Menambahkan kolom title2
+    allowNull: true, // Anda bisa mengatur ini sesuai kebutuhan
+  }
+
 },{
   freezeTableName:true
-}
+},
 );
 
 
@@ -29,6 +38,17 @@ Perkara.hasMany(Catatan, { foreignKey: 'id_perkara' });
 //   Perkara.hasMany(models.SyaratTambahan, { foreignKey: 'id_perkara' });
 // };
 
+// (async () => {
+//   try {
+//     await db.sync({ alter: true }); // 'alter: true' akan memodifikasi tabel yang sudah ada
+//     console.log("Database has been synced!");
+//   } catch (error) {
+//     console.error("Error syncing database:", error);
+//   }
+// })();
+
+
+
 
 // (async () => {
 //   try {
@@ -41,6 +61,12 @@ Perkara.hasMany(Catatan, { foreignKey: 'id_perkara' });
 
 export default Perkara;
 
-// (async()=>{
-//   await db.sync();
-// })()
+// Menyinkronkan model ke database
+// (async () => {
+//   try {
+//     await db.sync({ alter: true }); // 'alter: true' akan memodifikasi tabel yang sudah ada
+//     console.log("Database has been synced!");
+//   } catch (error) {
+//     console.error("Error syncing database:", error);
+//   }
+// })();
