@@ -19,22 +19,22 @@ import setupChatSocket from "./socket/chatSocket.js";
 import http from "http";
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: [ 
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'https://ptsp-pa-admin.vercel.app',
-      'https://ptsp-online.vercel.app'
-    ],
-    methods: ["GET", "POST"],
-    credentials: true
-  },
-});
+// const server = http.createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: [ 
+//       'http://localhost:5173',
+//       'http://localhost:5174',
+//       'https://ptsp-pa-admin.vercel.app',
+//       'https://ptsp-online.vercel.app'
+//     ],
+//     methods: ["GET", "POST"],
+//     credentials: true
+//   },
+// });
 
 // Initialize Socket.io with chat setup
-setupChatSocket(io);
+// setupChatSocket(io);
 
 app.use(cors({
   origin: [
@@ -63,6 +63,6 @@ app.use(MessageRoute);
 
 
 app.use(express.static("public"));
-server.listen(5000,()=> console.log("server Up and Running"))
+app.listen(5000,()=> console.log("server Up and Running"))
 
 

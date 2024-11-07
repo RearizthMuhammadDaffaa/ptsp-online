@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 import axios from "axios"
 
 // const socket = io('http://localhost:5000');
-const socket = io('https://ptsp-online-api.vercel.app');
+// const socket = io('https://ptsp-online-api.vercel.app');
 
 const Chat = () => {
     const [messages, setMessages] = useState([]);
