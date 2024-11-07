@@ -19,23 +19,23 @@ dotenv.config();
 //   dialect:'mysql',
 //   dialectModule:mysql2
 // });
-// const db = new Sequelize(
-//   "rianapri_ptsp_pa_sumedang",
-//   "rianapri_daffaa_77",
-//  "daffaa123456daffaa;;",
-//   {
-//   host:"api-ptsp.rianaprilyawan.web.id",
-//   dialect:'mysql',
-//   dialectModule:mysql2
-// });
 const db = new Sequelize(
-  "pstp-pa-sumedang",
-  "root",
- "",
+  "rianapri_ptsp_pa_sumedang",
+  "rianapri_daffaa_77",
+ "daffaa123456daffaa;;",
   {
-  host:"localhost",
+  host:"api-ptsp.rianaprilyawan.web.id",
   dialect:'mysql',
   dialectModule:mysql2
 });
+// const db = new Sequelize(
+//   "pstp-pa-sumedang",
+//   "root",
+//  "",
+//   {
+//   host:"localhost",
+//   dialect:'mysql',
+//   dialectModule:mysql2
+// });
 
 export default db;
