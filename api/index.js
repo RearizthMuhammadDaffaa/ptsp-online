@@ -46,8 +46,8 @@ app.use(cors({
   credentials: true  // Izinkan cookie untuk dikirim
 }));
 app.use(express.json());
-app.use(cookieParser());
 app.use(FileUpload());
+app.use(cookieParser());
 
 app.use(SliderRoute);
 app.use(PerkaraRoute);
