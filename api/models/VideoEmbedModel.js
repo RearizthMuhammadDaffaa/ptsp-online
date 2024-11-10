@@ -12,6 +12,3 @@ const VideoEmbed = db.define('video_embed',{
 
 export default VideoEmbed;
 
-// (async()=>{
-//   await db.sync();
-// })()

@@ -13,6 +13,3 @@ const Menu = db.define('menu',{
 
 export default Menu;
 
-// (async()=>{
-//   await db.sync();
-// })()

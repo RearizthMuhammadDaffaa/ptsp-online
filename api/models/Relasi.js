@@ -18,17 +18,5 @@ Catatan.belongsTo(Perkara, { foreignKey: "id_perkara" });
 Harga.hasMany(Kecamatan, { foreignKey: 'radius', sourceKey: 'radius' });
 Kecamatan.belongsTo(Harga, { foreignKey: 'radius', targetKey: 'radius' });
 
-// (async () => {
-//   try {
-//     await db.sync({ force: false });
-//     console.log("Running db.sync without force:true");
-//   } catch (error) {
-//     console.error("Error during database sync:", error);
-//   }
-// })();
 
 
-(async () => {
-  console.log("Running db.sync without force:true");
-  await db.sync();
-})();

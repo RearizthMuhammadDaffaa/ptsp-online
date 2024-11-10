@@ -36,6 +36,3 @@ const Message = db.define('message',{
 
 export default Message;
 
-// (async()=>{
-//   await db.sync();
-// })()

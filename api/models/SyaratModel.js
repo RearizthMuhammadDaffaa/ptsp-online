@@ -29,26 +29,8 @@ const Syarat = db.define('syarat',{
 });
 
 
-// Syarat.belongsTo(Perkara, { foreignKey: 'id_perkara' });
-// Syarat.hasMany(Catatan, { foreignKey: "id_syarat" });
 
-// (async () => {
-//   try {
-//     await Syarat.drop();  // Menghapus tabel `syarat`
-//     console.log('Tabel Syarat berhasil dihapus');
-//   } catch (error) {
-//     console.error('Gagal menghapus tabel Syarat:', error.message);
-//   }
-// })();
-
-
-// Syarat.associate = function(models) {
-//   Syarat.belongsTo(Perkara, { foreignKey: 'id_perkara' });
-//   Syarat.hasMany(models.Dokumen, { foreignKey: 'id_syarat' });
-// };
 
 export default Syarat;
 
-// (async()=>{
-//   await db.sync();
-// })()
+

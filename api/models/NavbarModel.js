@@ -14,6 +14,3 @@ const Navbar = db.define('navbar',{
 
 export default Navbar;
 
-// (async()=>{
-//   await db.sync();
-// })()

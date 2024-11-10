@@ -13,6 +13,3 @@ const Slider = db.define('slider',{
 
 export default Slider;
 
-// (async()=>{
-//   await db.sync();
-// })()

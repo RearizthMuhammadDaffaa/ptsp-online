@@ -22,28 +22,7 @@ const SyaratTambahan = db.define('syarat_tambahan',{
   freezeTableName:true
 });
 
-// Perkara.hasMany(SyaratTambahan, { foreignKey: 'id_perkara' });
-// SyaratTambahan.belongsTo(Perkara, { foreignKey: 'id_perkara' });
 
-
-
-// Syarat.associate = function(models) {
-//   Syarat.belongsTo(Perkara, { foreignKey: 'id_perkara' });
-//   Syarat.hasMany(models.Dokumen, { foreignKey: 'id_syarat' });
-// };
-
-
-// (async () => {
-//   try {
-//     await SyaratTambahan.drop();  // Menghapus tabel `syarat`
-//     console.log('Tabel Syarat berhasil dihapus');
-//   } catch (error) {
-//     console.error('Gagal menghapus tabel Syarat:', error.message);
-//   }
-// })();
 
 export default SyaratTambahan;
 
-// (async()=>{
-//   await db.sync();
-// })()
