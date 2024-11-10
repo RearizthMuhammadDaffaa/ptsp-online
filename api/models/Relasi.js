@@ -20,9 +20,15 @@ Kecamatan.belongsTo(Harga, { foreignKey: 'radius', targetKey: 'radius' });
 
 // (async () => {
 //   try {
-//     await db.sync({ force: true });
-//     console.log("Database & tables created!");
+//     await db.sync({ force: false });
+//     console.log("Running db.sync without force:true");
 //   } catch (error) {
 //     console.error("Error during database sync:", error);
 //   }
 // })();
+
+
+(async () => {
+  console.log("Running db.sync without force:true");
+  await db.sync();
+})();

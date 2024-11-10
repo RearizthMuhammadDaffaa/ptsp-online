@@ -48,15 +48,6 @@ const Harga = db.define('harga',{
 Harga.hasMany(Kecamatan, { foreignKey: 'radius', sourceKey: 'radius' });
 
 
-(async () => {
-  try {
-    await db.sync({ force: true });
-    console.log("Database & tables created!");
-  } catch (error) {
-    console.error("Error during database sync:", error);
-  }
-})();
-
 
 
 
