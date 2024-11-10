@@ -14,6 +14,8 @@ import VideoEmbedRoute from "./routes/VideoEmbedRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
 import UserRoute from "./routes/UserRoute.js";
 import MessageRoute from "./routes/MessageRoute.js";
+import KecamatanRoute from "./routes/KecamatanRoute.js";
+import HargaRoute from "./routes/HargaRoute.js";
 import { Server } from "socket.io";
 import setupChatSocket from "./socket/chatSocket.js";
 import http from "http";
@@ -60,6 +62,8 @@ app.use(VideoEmbedRoute);
 app.use(AuthRoute);
 app.use(UserRoute);
 app.use(MessageRoute);
+app.use(HargaRoute);
+app.use(KecamatanRoute);
 
 
 app.use(express.static("public"));
