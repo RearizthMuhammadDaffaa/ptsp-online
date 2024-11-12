@@ -41,6 +41,21 @@ export const saveHarga = async (req, res) => {
  
 };
 
+export const saveHargas = async (req, res) => {
+  try {
+    // Mengecek apakah data yang dikirim adalah array
+    if (Array.isArray(req.body)) {
+      await Harga.bulkCreate(req.body); // Untuk insert banyak data sekaligus
+      res.status(201).json({ msg: 'Harga Berhasil Ditambahkan' });
+    } else {
+      await Harga.create(req.body); // Untuk insert satu data
+      res.status(201).json({ msg: 'Harga Berhasil Ditambahkan' });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const updateHarga = async (req, res) => {
   // const Harga = await Harga.findOne({
   //   where: {

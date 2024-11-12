@@ -14,7 +14,7 @@ const router = express.Router();
 router.get('/user', getUsers);
 router.get('/user/:id', getUsersById);
 router.get('/user/message', getUsersRoleUser);
-router.post('/user', createUser);
+router.post('/user', verifyToken(['superadmin']),createUser);
 router.patch('/user/:id',verifyToken(['superadmin']),updateUser);
 router.delete('/user/:id',verifyToken(['superadmin']),deleteUser);
 

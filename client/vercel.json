@@ -2,7 +2,13 @@
   "routes": [
     { "src": "/", "dest": "/" },
     { "src": "/panjar", "dest": "/" },
-    { "src": "/panjar/hasil-panjar/", "dest": "/" }
+    { "src": "/panjar/hasil-panjar/", "dest": "/" },
+    { "src": "/syarat-berperkara", "dest": "/" },
+    { "src": "/register", "dest": "/" },
+    { "src": "/login", "dest": "/" },
+    { "src": "/reset-password/(.*)", "dest": "/" }
+
  
   ]
 }
+

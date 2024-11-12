@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import { dataKecamatan, dataHarga } from "../utils/data";
+// import { dataKecamatan, dataHarga } from "../utils/data";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 const Panjar = () => {
   const [area, setArea] = useState("dalam-kabupaten");
@@ -9,14 +10,41 @@ const Panjar = () => {
   const [radiusPenggugat, setRadiusPenggugat] = useState(1);
   const [harga_p, setHarga_P] = useState({});
   const [harga_t, setHarga_T] = useState({});
-  const [kec, setKec] = useState(dataKecamatan[0].kecamatan);
-  const [kecTergugat, setKecTergugat] = useState(dataKecamatan[0].kecamatan);
+  const [dataKecamatan,setDataKecamatan] = useState([]);
+  const [dataHarga,setDataHarga] = useState([]);
+  const [kec, setKec] = useState("");
+  const [kecTergugat, setKecTergugat] = useState("");
   const navigate = useNavigate();
   const [title, setTitle] = useState("suami");
   
+  
+  const getDataKecamatan = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API}kecamatan`)
+      setDataKecamatan(response.data)
+      console.log(dataKecamatan);
+      
+    } catch (error) {
+      console.log(error.message);
+      
+    }
+  }
+  const getDataHarga = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API}harga`)
+      setDataHarga(response.data)
+      console.log("ini data harga",dataHarga);
+      
+    } catch (error) {
+      console.log(error.message);
+      
+    }
+  }
+
 
   useEffect(()=> {
-
+    getDataKecamatan()
+    getDataHarga()
   },[])
 
   const handleHitungPanjar = () => {
@@ -26,9 +54,14 @@ const Panjar = () => {
     const indexKecTer = dataKecamatan.find(item => item.kecamatan === kecTergugat);
     const hargaTergugat = indexKecTer ? dataHarga.find(item => item.radius === indexKecTer.radius) : null;
     const finalHargaPenggugat = hargaPenggugat ? hargaPenggugat :  harga_p ;
+    const finalHargaTergugat = hargaTergugat ? hargaTergugat :  harga_t ;
+    // console.log("ini harga penggugat : ",hargaTergugat);
+    // console.log("ini harga final penggugat : ",finalHargaPenggugat);
+    // return
+    
 
     // Jika hargaTergugat kosong, gunakan harga_t
-    const finalHargaTergugat = hargaTergugat ? hargaTergugat :  harga_t ;
+   
     navigate(`/panjar/hasil-panjar/`, { state: { hargaPenggugat: finalHargaPenggugat, hargaTergugat: finalHargaTergugat, title, kec, kecTergugat ,area,areaTergugat} });
     
   };

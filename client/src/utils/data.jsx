@@ -44,7 +44,7 @@ export const dataMenu = [
   {
     img: menuIcon_3,
     title: "Chat Online",
-    link: "https://tawk.to/chat/672b45524304e3196addd824/1ic0gdjcd",
+    link: "https://tawk.to/chat/6732b9ff2480f5b4f59c044a/1icf2d4mi",
   },
 ];
 
