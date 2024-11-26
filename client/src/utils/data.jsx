@@ -6,7 +6,7 @@ import menuIcon_1 from "../assets/menuIMG/3d-illustration-of-calculator-icon-png
 import menuIcon_2 from "../assets/menuIMG/3d-note-icon-png.png";
 import menuIcon_3 from "../assets/menuIMG/3d-chat-icon-png.png";
 import social1 from "../assets/footerIMG/Youtube.png";
-import social2 from "../assets/footerIMG/instagram.png";
+import social2 from "../../public/footerIMG/Instagram.png";
 import social3 from "../assets/footerIMG/social3.jpg";
 import social4 from "../assets/footerIMG/social4.jpg";
 import social5 from "../assets/footerIMG/social5.jpg";
