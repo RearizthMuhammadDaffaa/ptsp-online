@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import logo from "../assets/PA-SUMEDANG.png";
+import logo from "../assets/navbarIMG/PA-SUMEDANG.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
