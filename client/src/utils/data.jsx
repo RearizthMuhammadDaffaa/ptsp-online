@@ -3,11 +3,11 @@ import slider_2 from "../assets/SliderIMG/slider-2.jpg";
 import slider_3 from "../assets/SliderIMG/slider-3.jpg";
 import slider_4 from "../assets/SliderIMG/download (35).jpg";
 import slider_5 from "../assets/SliderIMG/download (36).jpg";
-import menuIcon_1 from "../assets/menuIMG/menu-icon-1.jpg";
-import menuIcon_2 from "../assets/menuIMG/menu-icon-2.png";
-import menuIcon_3 from "../assets/menuIMG/menu-icon-3.jpg";
-import social1 from "../assets/footerIMG/Vector.jpg";
-import social2 from "../assets/footerIMG/social2.png";
+import menuIcon_1 from "../assets/3d-illustration-of-calculator-icon-png.png";
+import menuIcon_2 from "../assets/3d-note-icon-png.png";
+import menuIcon_3 from "../assets/3d-chat-icon-png.png";
+import social1 from "../assets/Youtube.png";
+import social2 from "../assets/instagram.png";
 import social3 from "../assets/footerIMG/social3.jpg";
 import social4 from "../assets/footerIMG/social4.jpg";
 import social5 from "../assets/footerIMG/social5.jpg";
@@ -65,10 +65,7 @@ export const dataVideo = [
 
 export const dataFooter = [
   { img: social1 },
-  { img: social2 },
-  { img: social3 },
-  { img: social4 },
-  { img: social5 },
+  { img: social2 }
 ];
 
 export const dataKecamatan = [

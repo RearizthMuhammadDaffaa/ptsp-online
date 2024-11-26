@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import logo from "../assets/navbarIMG/PA-SUMEDANG 1 (1).jpg";
+import logo from "../assets/PA-SUMEDANG.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
@@ -42,7 +42,7 @@ const Navbar = () => {
         <img 
           src={navbar[0]?.url || logo} // Gunakan logo default jika navbar[0] belum ada
           alt="Logo" 
-          className="md:w-full md:h-full w-[100px] bg-green-primary"
+          className="md:w-[70px] md:h-[70px] w-[70px] bg-green-primary"
         />
       </Link>
       <div className="container flex flex-col mr-auto text-left leading-tight justify-center">
