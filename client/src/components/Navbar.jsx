@@ -51,11 +51,11 @@ const Navbar = () => {
       </div>
       <div className="hidden md:flex justify-center items-center gap-10">
         <Link to="/" className="text-white">Home</Link>
-        {auth && auth.user ? (
+        {/* {auth && auth.user ? (
           <button onClick={handleLogout} className="text-white">Logout</button>
         ) : (
           <Link to="/login" className="text-white">Login</Link>
-        )}
+        )} */}
        
       </div>
 
@@ -83,10 +83,11 @@ const Navbar = () => {
         <label htmlFor="drawer-toggle" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 min-h-full w-80 p-4">
           <li><Link to="/">Home</Link></li>
-          <li>{auth && auth.user ? (
+          {/* <li>{auth && auth.user ? (
               <button className="text-left" onClick={handleLogout}>Logout</button>
             ) : (
-              <Link to="/login" className="">Login</Link> )}</li>
+              <Link to="/login" className="">Login</Link> )}
+            </li> */}
         </ul>
       </div>
     </div>

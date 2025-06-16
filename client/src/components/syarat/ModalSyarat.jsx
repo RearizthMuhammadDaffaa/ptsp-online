@@ -64,7 +64,7 @@ const ModalSyarat = ({ id }) => {
           <h1 className="text-green-primary font-bold text-xl mt-6">
             Syarat Berperkara
           </h1>
-          <h1 className="font-bold md:text-base text-sm mt-3">{dataPerkara.title1}</h1>
+          <h1 className="font-bold md:text-base text-sm mt-3">{dataPerkara.title1 ? dataPerkara.title1 : "Syarat"}</h1>
           <ol start="1" className="ml-5">
             {dataPerkara.syarats?.map((data, i) => (
               <li  key={i}>{data.deskripsi_syarat}</li>
@@ -73,7 +73,7 @@ const ModalSyarat = ({ id }) => {
           {Array.isArray(dataPerkara.syarat_tambahans) &&
             dataPerkara.syarat_tambahans.length > 0 && (
               <>
-                <h1 className="font-bold md:text-base text-sm mt-3">{dataPerkara.title2}</h1>
+                <h1 className="font-bold md:text-base text-sm mt-3">{dataPerkara.title2 ? dataPerkara.title2 : "Syarat Tambahan"}</h1>
                 <ol start="1" className="ml-5">
                   {dataPerkara.syarat_tambahans.map((data, i) => (
                     <li key={i}>{data.deskripsi_syarat_tambahan}</li>

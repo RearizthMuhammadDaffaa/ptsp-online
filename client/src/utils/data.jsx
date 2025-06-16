@@ -43,7 +43,7 @@ export const dataMenu = [
   {
     img: menuIcon_3,
     title: "Chat Online",
-    link: "https://tawk.to/chat/6732b9ff2480f5b4f59c044a/1icf2d4mi",
+    link: "https://tawk.to/chat/67287ead4304e3196adcc31a/1ibr2tmj6",
   },
 ];
 
@@ -165,6 +165,15 @@ export const dataHarga = [
   },
   {
     radius: 4,
+    pendaftaran: 30000,
+    proses: 75000,
+    panggilanPenggugat: 200000,
+    panggilanTergugat: 100000,
+    redaksi: 10000,
+    materai: 10000,
+  },
+  {
+    radius: 5,
     pendaftaran: 30000,
     proses: 75000,
     panggilanPenggugat: 200000,
