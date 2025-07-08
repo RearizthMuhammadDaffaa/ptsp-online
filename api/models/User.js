@@ -50,7 +50,9 @@ const User = db.define('User', {
   timestamps: true,
 });
 
-
+// (async()=>{
+//   await db.sync();
+// })();
 
 export default User;
 

@@ -351,12 +351,12 @@ const HasilPanjar = () => {
                 <tr className="border-none"></tr>
                 {/* row 15 */}
                 <tr className="border-none">
-                  <th className="border-none font-bold text-green-primary md:text-sm text-xs">
+                  <th className="border-none font-bold text-green-primary md:text-sm text-xs"  data-testid="total-panjar-title">
                     Jumlah Total Biaya Panjar
                   </th>
                   <th></th>
                   <th></th>
-                  <td className="text-right hasil-panjar-text md:text-sm text-xs">
+                  <td data-testid="total-panjar-value" className="text-right hasil-panjar-text md:text-sm text-xs">
                     {kecTergugat != null  ? formatRupiah(totalHarga) : formatRupiah(totalHarga_2)}
                   </td>
                 </tr>

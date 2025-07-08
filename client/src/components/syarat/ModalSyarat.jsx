@@ -14,7 +14,7 @@ const ModalSyarat = ({ id }) => {
         `${import.meta.env.VITE_API}syarat-perkara/${id}`
       );
       setDataPerkara(response.data);
-      console.log(dataPerkara);
+      
     } catch (error) {
       console.log(error);
     }

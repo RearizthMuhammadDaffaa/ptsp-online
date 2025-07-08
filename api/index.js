@@ -65,6 +65,11 @@ app.use(MessageRoute);
 app.use(HargaRoute);
 app.use(KecamatanRoute);
 
+app.use((req, res, next) => {
+  console.log("Origin:", req.headers.origin);
+  next();
+});
+
 
 app.use(express.static("public"));
 app.listen(5000,()=> console.log("server Up and Running"))
