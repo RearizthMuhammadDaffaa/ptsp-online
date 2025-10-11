@@ -43,7 +43,8 @@ app.use(cors({
     'http://localhost:5173',
     'http://localhost:5174',
     'https://ptsp-pa-admin.vercel.app',
-    'https://ptsp-online.vercel.app'
+    'https://ptsp-online.vercel.app',
+    'https://framer.com'
   ],  // Sesuaikan dengan URL React app
   credentials: true  // Izinkan cookie untuk dikirim
 }));

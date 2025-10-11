@@ -63,6 +63,7 @@ export const createUser = async (req,res) =>{
     });
     res.status(201).json({msg:'register berhasil'})
   } catch (error) {
+      console.error("Error di createUser:", error); // log error untuk debug
     res.status(400).json(error)
   }
 
